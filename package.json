@@ -24,6 +24,7 @@
   "homepage": "https://github.com/I-Gave/meta-auth#readme",
   "dependencies": {
     "eth-sig-util": "^1.4.2",
-    "ethereumjs-util": "^5.1.4"
+    "ethereumjs-util": "^5.1.4",
+    "uuid": "^3.2.1"
   }
 }
