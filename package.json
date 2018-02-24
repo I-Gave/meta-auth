@@ -1,0 +1,29 @@
+{
+  "name": "meta-auth",
+  "version": "1.0.0",
+  "description": "express middleware for metamask authentication",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/I-Gave/meta-auth.git"
+  },
+  "keywords": [
+    "metamask",
+    "ethereum",
+    "authentication",
+    "security"
+  ],
+  "author": "alex sherbuck",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/I-Gave/meta-auth/issues"
+  },
+  "homepage": "https://github.com/I-Gave/meta-auth#readme",
+  "dependencies": {
+    "eth-sig-util": "^1.4.2",
+    "ethereumjs-util": "^5.1.4"
+  }
+}
