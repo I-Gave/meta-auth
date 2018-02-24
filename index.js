@@ -87,7 +87,7 @@ function checkChallenge(data, sig) {
     return recovered;
   }
 
-  return null;
+  return false;
 }
 module.exports = metaAuth;
 
