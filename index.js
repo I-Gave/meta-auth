@@ -6,3 +6,5 @@ function metaAuth(options) {
     next();
   };
 }
+
+module.exports = metaAuth;
