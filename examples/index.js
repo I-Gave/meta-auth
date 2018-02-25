@@ -18,7 +18,7 @@ app.get('/auth/:MetaMessage/:MetaSignature', metaAuth, (req, res) => {
     res.send(req.metaAuth.recovered);
   } else {
     // Sig did not match, invalid authentication
-    res.status(500).send();
+    res.status(400).send();
   };
 });
 

@@ -90,5 +90,6 @@ function checkChallenge(data, sig) {
 
   return false;
 }
+
 module.exports = metaAuth;
 
