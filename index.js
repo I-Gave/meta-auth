@@ -84,6 +84,7 @@ function checkChallenge(data, sig) {
   const challenge = cache.get(recovered);
 
   if (challenge === data) {
+    cache.del(recovered);
     return recovered;
   }
 
