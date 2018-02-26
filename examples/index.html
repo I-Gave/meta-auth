@@ -26,7 +26,7 @@ let signature = null;
   }
 
   $('.get').on('click', function () {
-    $.get('http://localhost:3000/auth/' + web3.eth.accounts[0], (res) => {
+    $.get('http://localhost:3001/auth/' + web3.eth.accounts[0], (res) => {
       challenge = res;
       $('.challenge').text(challenge);
       const from = web3.eth.accounts[0];
@@ -51,7 +51,7 @@ let signature = null;
   });
 
   $('.verify').on('click', function() {
-    $.get('http://localhost:3000/auth/' + challenge + '/' + signature, (res) => {
+    $.get('http://localhost:3001/auth/' + challenge + '/' + signature, (res) => {
       console.log(res);
       if (res === web3.eth.accounts[0]) {
         $('.success').show();

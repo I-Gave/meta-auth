@@ -5,7 +5,7 @@ Express middleware for handling authentication with [MetaMask](https://metamask.
 ```
 $ npm install meta-auth --save
 ```
-Include  he middleware in your express routes
+Include the middleware in your express routes
 ```
 const metaAuth = require('meta-auth')();
 
@@ -21,13 +21,13 @@ app.get('/auth/:MetaMessage/:MetaSignature', metaAuth, (req, res) => {
     res.send(req.metaAuth.recovered);
   } else {
     // Sig did not match, invalid authentication
-    res.status(500).send();
+    res.status(400).send();
   };
 });
 ```
 MetaAuth will check the route parameters for `:MetaAddress`, `:MetaMessage`, and `:MetaSignature`
 
-Parameter names may be passed in the configuration
+Parameter names may be changed when passing in an optional config.
 ```
 const metaAuth = require('meta-auth')({
   message: 'msg',
