@@ -31,7 +31,7 @@ let signature = null;
       $('.challenge').text(challenge);
       const from = web3.eth.accounts[0];
       const params = [res, from];
-      const method = 'personal_sign';
+      const method = 'eth_signTypedData';
 
       web3.currentProvider.sendAsync({
         method,

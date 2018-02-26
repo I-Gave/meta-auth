@@ -76,7 +76,7 @@ function createChallenge (address) {
 }
 
 function checkChallenge(data, sig) {
-  const recovered = sigUtil.recoverPersonalSignature({
+  const recovered = sigUtil.recoverTypedSignature({
     data,
     sig
   });
