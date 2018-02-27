@@ -13,15 +13,9 @@ function metaAuth(options) {
   return function(req, res, next) {
 
     const DEFAULT_OPTIONS = {
-      message: 'MetaMessage',
       signature: 'MetaSignature',
+      message: 'MetaMessage',
       address: 'MetaAddress'
-    }
-
-    if (options.stdTTL)  {
-      cache = new NodeCache({
-        StdTTL: options.stdTTL
-      })
     }
 
     this.options = Object.assign(
@@ -45,6 +39,7 @@ function metaAuth(options) {
     // Challenge message returned with signature
     if (req.params[this.options.message] &&
         req.params[this.options.signature]) {
+
       const recovered = checkChallenge(
         req.params[this.options.message],
         req.params[this.options.signature]
@@ -64,26 +59,32 @@ function createChallenge (address) {
     .update(address + uuidv4())
     .digest('hex');
 
-  const challenge = ethUtil.bufferToHex(new Buffer(`
-    ** MetaAuth Challenge **
-    Address: ${address}
-    Hash: ${hash}
-    `, 'utf8'));
+  const challenge = [{
+    type: 'string',
+    name: 'challenge',
+    value: hash
+  }];
 
   cache.set(address, challenge);
 
   return challenge;
 }
 
-function checkChallenge(data, sig) {
+function checkChallenge(challenge, sig) {
+  const data = [{
+    type: 'string',
+    name: 'challenge',
+    value: challenge
+  }]
   const recovered = sigUtil.recoverTypedSignature({
     data,
     sig
   });
 
-  const challenge = cache.get(recovered);
+  const storedChallenge = cache.get(recovered);
 
-  if (challenge === data) {
+
+  if (storedChallenge[0].value === challenge) {
     cache.del(recovered);
     return recovered;
   }

@@ -7,14 +7,13 @@
   <h1 class="fail" style="display: none;">Authentication Failed</h1>
 <button class="get">Get Challenge</button>
 
-<button class="verify">Verify Signature</button>
+<button id="<signTypedDataButton></signTypedDataButton>" class="verify">signTypedDataButton</button>
 
 <pre class="challenge"></pre>
 <pre class="signature"></pre>
 <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
   crossorigin="anonymous">
   </script>
-
 
 <script type="text/javascript">
 let challenge = null;
@@ -26,10 +25,18 @@ let signature = null;
   }
 
   $('.get').on('click', function () {
+    $('.challenge').empty();
     $.get('http://localhost:3001/auth/' + web3.eth.accounts[0], (res) => {
-      challenge = res;
-      $('.challenge').text(challenge);
+      challenge = res[0].value;
+
+      $('.challenge').append(res[0].name);
+      $('.challenge').append('<br>');
+      $('.challenge').append(res[0].value);
+      $('.challenge').append('<br>');
+
+
       const from = web3.eth.accounts[0];
+
       const params = [res, from];
       const method = 'eth_signTypedData';
 
