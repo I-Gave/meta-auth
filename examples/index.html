@@ -7,7 +7,7 @@
   <h1 class="fail" style="display: none;">Authentication Failed</h1>
 <button class="get">Get Challenge</button>
 
-<button id="<signTypedDataButton></signTypedDataButton>" class="verify">signTypedDataButton</button>
+<button class="verify">Verify Signature</button>
 
 <pre class="challenge"></pre>
 <pre class="signature"></pre>
@@ -27,17 +27,21 @@ let signature = null;
   $('.get').on('click', function () {
     $('.challenge').empty();
     $.get('http://localhost:3001/auth/' + web3.eth.accounts[0], (res) => {
-      challenge = res[0].value;
+      challenge = [{
+        type: 'string',
+        name: 'challenge',
+        value: res
+      }];
 
-      $('.challenge').append(res[0].name);
+      $('.challenge').append(challenge[0].name);
       $('.challenge').append('<br>');
-      $('.challenge').append(res[0].value);
+      $('.challenge').append(challenge[0].value);
       $('.challenge').append('<br>');
 
 
       const from = web3.eth.accounts[0];
 
-      const params = [res, from];
+      const params = [challenge, from];
       const method = 'eth_signTypedData';
 
       web3.currentProvider.sendAsync({
@@ -58,8 +62,7 @@ let signature = null;
   });
 
   $('.verify').on('click', function() {
-    $.get('http://localhost:3001/auth/' + challenge + '/' + signature, (res) => {
-      console.log(res);
+    $.get('http://localhost:3001/auth/' + challenge[0].value + '/' + signature, (res) => {
       if (res === web3.eth.accounts[0]) {
         $('.success').show();
       } else {

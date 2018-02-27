@@ -59,15 +59,9 @@ function createChallenge (address) {
     .update(address + uuidv4())
     .digest('hex');
 
-  const challenge = [{
-    type: 'string',
-    name: 'challenge',
-    value: hash
-  }];
+  cache.set(address, hash);
 
-  cache.set(address, challenge);
-
-  return challenge;
+  return hash;
 }
 
 function checkChallenge(challenge, sig) {
@@ -83,8 +77,7 @@ function checkChallenge(challenge, sig) {
 
   const storedChallenge = cache.get(recovered);
 
-
-  if (storedChallenge[0].value === challenge) {
+  if (storedChallenge === challenge) {
     cache.del(recovered);
     return recovered;
   }
