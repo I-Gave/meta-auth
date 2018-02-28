@@ -42,6 +42,17 @@ If MetaAuth finds `req.params.MetaAddress` set it will assign a challenge to the
 ### :MetaMessage & :MetaSignature
 `:MetaMessage` is the previously issued challenge and `:MetaSignature` is the user's signature for the provided message. If the recovery address matches the address stored for the given challenge MetaAuth returns the recovery address. In the case of an error or no match `false` is returned.
 
+
+### Config
+```
+const metaAuth = new MetaAuth({
+  signature: 'MetaSignature',
+  message: 'MetaMessage',
+  address: 'MetaAddress',
+  banner: 'Example Site Banner'
+});
+```
+
 ## Authors
 
 * **Alex Sherbuck** - [I Gave](https://igave.io)
