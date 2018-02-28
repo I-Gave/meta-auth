@@ -27,16 +27,16 @@ let signature = null;
   $('.get').on('click', function () {
     $('.challenge').empty();
     $.get('http://localhost:3001/auth/' + web3.eth.accounts[0], (res) => {
-      challenge = [{
-        type: 'string',
-        name: 'challenge',
-        value: res
-      }];
+      challenge = res
 
-      $('.challenge').append(challenge[0].name);
-      $('.challenge').append('<br>');
-      $('.challenge').append(challenge[0].value);
-      $('.challenge').append('<br>');
+      console.log(res)
+
+      res.forEach(line => {
+        $('.challenge').append(line.name);
+        $('.challenge').append('<br>');
+        $('.challenge').append(line.value);
+        $('.challenge').append('<br>');
+      })
 
 
       const from = web3.eth.accounts[0];
@@ -62,7 +62,7 @@ let signature = null;
   });
 
   $('.verify').on('click', function() {
-    $.get('http://localhost:3001/auth/' + challenge[0].value + '/' + signature, (res) => {
+    $.get('http://localhost:3001/auth/' + challenge[1].value + '/' + signature, (res) => {
       if (res === web3.eth.accounts[0]) {
         $('.success').show();
       } else {

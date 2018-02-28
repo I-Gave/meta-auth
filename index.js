@@ -15,7 +15,8 @@ class MetaAuth {
       const DEFAULT_OPTIONS = {
         signature: 'MetaSignature',
         message: 'MetaMessage',
-        address: 'MetaAddress'
+        address: 'MetaAddress',
+        banner: '*** WARNING *** Ask the site to change the default banner *** WARNING ***'
       }
 
       this.options = Object.assign(
@@ -29,10 +30,10 @@ class MetaAuth {
 
         if (ethUtil.isValidAddress(address)) {
           const challenge = this.createChallenge(address);
-          let token = {
+          let json = {
             challenge
           }
-          req.metaAuth = token;
+          req.metaAuth = json;
         }
       }
 
@@ -61,15 +62,29 @@ class MetaAuth {
 
     cache.set(address, hash);
 
-    return hash;
+    const challenge = [{
+      type: 'string',
+      name: 'banner',
+      value: this.options.banner
+    }, {
+      type: 'string',
+      name: 'challenge',
+      value: hash
+    }];
+
+    return challenge;
   }
 
   checkChallenge(challenge, sig) {
     const data = [{
       type: 'string',
+      name: 'banner',
+      value: this.options.banner
+    }, {
+      type: 'string',
       name: 'challenge',
       value: challenge
-    }]
+    }];
     const recovered = sigUtil.recoverTypedSignature({
       data,
       sig
