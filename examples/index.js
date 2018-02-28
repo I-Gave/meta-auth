@@ -2,7 +2,7 @@ const express = require('express');
 const MetaAuth = require('meta-auth');
 
 const app = express();
-const metaAuth = MetaAuth();
+const metaAuth = new MetaAuth();
 
 app.use('/', express.static('.'));
 
