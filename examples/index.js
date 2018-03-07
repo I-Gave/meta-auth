@@ -4,15 +4,6 @@ const MetaAuth = require('meta-auth');
 const app = express();
 const metaAuth = new MetaAuth();
 
-/* Optional - config
-const metaAuth = new MetaAuth({
-  signature: 'MetaSignature',
-  message: 'MetaMessage',
-  address: 'MetaAddress',
-  banner: 'Example Site Banner'
-});
-*/
-
 app.use('/', express.static('.'));
 
 app.get('/auth/:MetaAddress', metaAuth, (req, res) => {

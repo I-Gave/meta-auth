@@ -1,6 +1,6 @@
 {
   "name": "meta-auth",
-  "version": "1.0.0",
+  "version": "1.1.1",
   "description": "express middleware for metamask authentication",
   "main": "index.js",
   "scripts": {

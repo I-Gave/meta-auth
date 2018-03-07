@@ -1,6 +1,6 @@
 {
   "name": "examples",
-  "version": "1.0.0",
+  "version": "1.1.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -10,6 +10,6 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.2",
-    "meta-auth": "git+https://github.com/I-Gave/meta-auth.git"
+    "meta-auth": "^1.1.0"
   }
 }
