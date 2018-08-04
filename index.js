@@ -60,7 +60,7 @@ class MetaAuth {
       .update(address + uuidv4())
       .digest('hex');
 
-    cache.set(address, hash);
+    cache.set(address.toLowerCase(), hash);
 
     const challenge = [{
       type: 'string',
@@ -90,7 +90,7 @@ class MetaAuth {
       sig
     });
 
-    const storedChallenge = cache.get(recovered);
+    const storedChallenge = cache.get(recovered.toLowerCase());
 
     if (storedChallenge === challenge) {
       cache.del(recovered);
